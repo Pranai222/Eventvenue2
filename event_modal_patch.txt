@@ -1,0 +1,11 @@
+      </div>
+
+      {showLocationMap && (
+        <ViewLocationMap 
+          address={event.location} 
+          onClose={() => setShowLocationMap(false)} 
+        />
+      )}
+    </div>
+  )
+}

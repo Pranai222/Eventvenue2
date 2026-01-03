@@ -1,0 +1,26 @@
+# render.yaml - Render Blueprint for EventVenue Backend
+# Deploy: Dashboard → New → Blueprint → Connect this repo
+
+services:
+  - type: web
+    name: eventvenue-backend
+    runtime: java
+    plan: free
+    buildCommand: cd backend && mvn clean package -DskipTests
+    startCommand: java -Dspring.profiles.active=prod -jar backend/target/eventvenue-backend-1.0.0.jar
+    healthCheckPath: /api/health
+    envVars:
+      - key: DATABASE_URL
+        sync: false  # Set manually in dashboard
+      - key: DATABASE_USERNAME
+        sync: false
+      - key: DATABASE_PASSWORD
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: FRONTEND_URL
+        sync: false
+      - key: STRIPE_SECRET_KEY
+        sync: false
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
